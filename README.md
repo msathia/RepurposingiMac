@@ -2,6 +2,8 @@
 
 Turn a **2017 Intel iMac (8 GB RAM / 1 TB HDD)** into a dual-boot system: macOS Ventura (~250 GB) + **Xubuntu Minimal** (~750 GB) with local Ollama inference and a Telegram bot interface.
 
+See **[NETWORKING.md](NETWORKING.md)** for how the local iMac reaches Telegram over the internet (long polling, NAT, and protocol flow).
+
 ## Repository Layout
 
 ```
@@ -9,6 +11,7 @@ Turn a **2017 Intel iMac (8 GB RAM / 1 TB HDD)** into a dual-boot system: macOS 
 ├── ai_bot/
 │   ├── ai_bot.py              # Telegram ↔ Ollama polling bot
 │   └── requirements.txt       # Python dependencies
+├── NETWORKING.md              # How local bot traffic reaches Telegram
 ├── nanobot/skills/
 │   └── yt-recommender/
 │       ├── SKILL.md           # Agent directive for video recommendations
