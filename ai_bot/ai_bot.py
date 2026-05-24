@@ -22,7 +22,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logging.info("Incoming task request parsed: %s", user_text)
 
     system_prompt = (
-        "You are a helpful AI assistant running locally on a 2017 iMac "
+        "You are a helpful AI assistant running locally on a minimal-footprint home machine "
         "using Xubuntu Minimal. You are efficient, concise, and aware of "
         "your hardware limitations. Your creator is Sathia."
     )

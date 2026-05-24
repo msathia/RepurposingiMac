@@ -1,6 +1,8 @@
-# Repurposing iMac — Lean AI Machine Blueprint
+# Minimal Home Bot — Build on a Lean Machine
 
-Turn a **2017 Intel iMac (8 GB RAM / 1 TB HDD)** into a dual-boot system: macOS Ventura (~250 GB) + **Xubuntu Minimal** (~750 GB) with local Ollama inference and a Telegram bot interface.
+Build a **home-based Telegram AI bot** on a **minimal-footprint machine** — local Ollama inference, modular skills, and always-on systemd service. This blueprint uses **Xubuntu Minimal** to keep RAM and disk use low.
+
+**Example deployment:** a 2017 Intel iMac (8 GB RAM / 1 TB HDD) dual-booting macOS Ventura (~250 GB) + Xubuntu Minimal (~750 GB). The steps below work on any small PC, laptop, or Mac with similar constraints.
 
 > **Note — hardware is flexible.** The iMac specs above are my personal setup, not hard requirements. Any machine with a modest RAM footprint and a smaller disk works fine for this bot stack. What actually matters:
 >
@@ -12,7 +14,7 @@ Turn a **2017 Intel iMac (8 GB RAM / 1 TB HDD)** into a dual-boot system: macOS 
 >
 > A smaller SSD, an older laptop, or a Linux-only install (no macOS slice) all fit this blueprint. Scale the model down further (e.g. `llama3.2:1b`) if RAM is tight.
 
-See **[NETWORKING.md](NETWORKING.md)** for how the local iMac reaches Telegram over the internet (long polling, NAT, and protocol flow).
+See **[NETWORKING.md](NETWORKING.md)** for how your home machine reaches Telegram over the internet (long polling, NAT, and protocol flow).
 
 ## Repository Layout
 
@@ -64,8 +66,8 @@ Before touching the Linux installer, partition inside **macOS Ventura**.
 
 ### Step 1: Boot the Live Installer
 
-1. Shut down the iMac.
-2. Insert the flash drive, hold **Option (⌥)** while powering on.
+1. Shut down the machine.
+2. Insert the flash drive. On Apple hardware, hold **Option (⌥)** while powering on; on PCs, use your firmware boot menu key.
 3. Select the **EFI Boot** volume with your Linux image.
 4. On the GRUB menu, choose **Try or Install Xubuntu**.
 
@@ -95,11 +97,11 @@ Complete username, password, and installation.
 
 ## Part 3: Post-Install Optimization
 
-Clone this repo on the iMac, then run from the repo root:
+Clone this repo on the host machine, then run from the repo root:
 
 ```bash
-git clone <this-repo-url> ~/RepurposingiMac
-cd ~/RepurposingiMac
+git clone https://github.com/msathia/minimal-home-bot.git ~/minimal-home-bot
+cd ~/minimal-home-bot
 chmod +x scripts/*.sh
 ./scripts/post-install.sh
 ```
@@ -190,7 +192,7 @@ The bot auto-invokes this skill when messages mention youtube, video, watch, or 
 
 ## Part 6: Systemd Service (Always-On)
 
-From the repo root on the iMac:
+From the repo root on the host machine:
 
 ```bash
 ./scripts/install-service.sh sathia YOUR_TELEGRAM_TOKEN
@@ -218,9 +220,9 @@ journalctl -u aibot -f
 
 ## Hardware Notes
 
-- **RAM:** 8 GB — use `llama3.2:3b` or similarly small models.
-- **Storage:** 1 TB HDD — expect slower model loads than SSD; minimal install reduces background I/O.
-- **Wi-Fi:** Enable third-party drivers during install for Broadcom Apple Wi-Fi.
+- **RAM:** 4 GB minimum, 8 GB+ comfortable — use `llama3.2:3b` or similarly small models.
+- **Storage:** HDD works but SSD is faster for model loads; minimal install reduces background I/O.
+- **Wi-Fi (Apple hardware):** Enable third-party drivers during install for Broadcom Wi-Fi chips.
 
 ---
 
