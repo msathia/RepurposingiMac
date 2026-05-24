@@ -2,6 +2,16 @@
 
 Turn a **2017 Intel iMac (8 GB RAM / 1 TB HDD)** into a dual-boot system: macOS Ventura (~250 GB) + **Xubuntu Minimal** (~750 GB) with local Ollama inference and a Telegram bot interface.
 
+> **Note — hardware is flexible.** The iMac specs above are my personal setup, not hard requirements. Any machine with a modest RAM footprint and a smaller disk works fine for this bot stack. What actually matters:
+>
+> | Resource | Minimum | Comfortable | What consumes it |
+> |----------|---------|-------------|------------------|
+> | **RAM** | 4 GB | 8 GB+ | Xubuntu Minimal idle ~600 MB; `llama3.2:3b` inference ~2–3 GB peak; the Telegram bot and yt-dlp skill add only tens of MB |
+> | **Linux disk** | ~32 GB | 64 GB+ | Xubuntu Minimal ~8–15 GB; Ollama + `llama3.2:3b` model ~2 GB; headroom for logs and updates |
+> | **Dual-boot disk** | ~128 GB total | 256 GB+ | macOS slice (~50–100 GB) + Linux slice (see above); partition sizes scale down — you do not need 1 TB |
+>
+> A smaller SSD, an older laptop, or a Linux-only install (no macOS slice) all fit this blueprint. Scale the model down further (e.g. `llama3.2:1b`) if RAM is tight.
+
 See **[NETWORKING.md](NETWORKING.md)** for how the local iMac reaches Telegram over the internet (long polling, NAT, and protocol flow).
 
 ## Repository Layout
